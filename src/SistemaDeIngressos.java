@@ -43,6 +43,11 @@ public class SistemaDeIngressos {
         }
     }
 
+    private String lerString(Scanner scanner, String mensagem) {
+        System.out.println(mensagem);
+        return scanner.nextLine();
+    }
+
     private String lerTelefone(Scanner scanner, String mensagem) {
         while (true) {
             System.out.println(mensagem);
@@ -59,7 +64,8 @@ public class SistemaDeIngressos {
         System.out.println("\n================ MENU ================");
         System.out.println("1. Cadastrar Visitante");
         System.out.println("2. Listar Visitantes");
-        System.out.println("3. Sair");
+        System.out.println("3. Emitir Ingresso");
+        System.out.println("4. Sair");
         System.out.println("======================================");
     }
 
@@ -87,7 +93,21 @@ public class SistemaDeIngressos {
                     gestaoDeVisitantes.listarVisitantes();
                     break;
                 // Outras opções do menu
+
                 case 3:
+                    String data = lerString(scanner, "Informe a data (dd/MM/yyyy):");
+                    String nomeVisitante = lerString(scanner, "Informe o nome do visitante:");
+                    Visitante v = gestaoDeVisitantes.encontrarVisitante(nomeVisitante);
+                    if (v != null) {
+                        if (gestaoDeIngressos.emitirIngresso(data, v)) {
+                            System.out.println("Ingresso emitido com sucesso.");
+                        }
+                    } else {
+                        System.out.println("Visitante não encontrado.");
+                    }
+                    break;
+
+                case 4:
                     System.out.println("Encerrando o sistema...");
                     scanner.close();
                     return;
