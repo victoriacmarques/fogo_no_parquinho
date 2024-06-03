@@ -9,10 +9,12 @@ import java.util.Map;
 public class GestaoDeIngressos {
     private List<Ingresso> ingressos;
     private Map<String, List<Ingresso>> ingressosPorData;
+    private List<RegistroAtracao> registrosAtracoes;
 
     public GestaoDeIngressos() {
         this.ingressos = new ArrayList<>();
         this.ingressosPorData = new HashMap<>();
+        this.registrosAtracoes = new ArrayList<>();
     }
 
     public List<Ingresso> getIngressos() {
