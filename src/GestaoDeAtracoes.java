@@ -10,5 +10,10 @@ public class GestaoDeAtracoes {
             this.atracoes.add(atracao);
         }
     }
-
+    public void listarAtracoes() {
+        for (int i = 0; i < atracoes.size(); i++) {
+            System.out.println((i + 1) + ". " + atracoes.get(i).getNome());
+        }
+    }
 }
+
