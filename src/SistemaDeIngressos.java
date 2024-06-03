@@ -1,15 +1,15 @@
 import java.util.Scanner;
-
-import java.util.Scanner;
 import java.time.LocalDate;
 
 public class SistemaDeIngressos {
     private GestaoDeVisitantes gestaoDeVisitantes;
     private GestaoDeIngressos gestaoDeIngressos;
+    private GestaoDeAtracoes gestaoDeAtracoes; // Adicionado
 
     public SistemaDeIngressos() {
         this.gestaoDeIngressos = new GestaoDeIngressos();
         this.gestaoDeVisitantes = new GestaoDeVisitantes(gestaoDeIngressos);
+        this.gestaoDeAtracoes = new GestaoDeAtracoes(); // Inicializa as atrações
     }
 
     private Visitante criarVisitante(Scanner scanner) {
@@ -92,8 +92,6 @@ public class SistemaDeIngressos {
                 case 2:
                     gestaoDeVisitantes.listarVisitantes();
                     break;
-                // Outras opções do menu
-
                 case 3:
                     String data = lerString(scanner, "Informe a data (dd/MM/yyyy):");
                     String nomeVisitante = lerString(scanner, "Informe o nome do visitante:");
@@ -106,7 +104,6 @@ public class SistemaDeIngressos {
                         System.out.println("Visitante não encontrado.");
                     }
                     break;
-
                 case 4:
                     System.out.println("Encerrando o sistema...");
                     scanner.close();
