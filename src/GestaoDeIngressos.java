@@ -68,4 +68,20 @@ public class GestaoDeIngressos {
             return false;
         }
     }
+    public void registrarVisitaAtracao(Visitante visitante, Atracao atracao) {
+        boolean temIngressoAtivo = false;
+        String data = null;
+        for (Ingresso ingresso : ingressos) {
+            if (ingresso.getVisitante().equals(visitante) && ingresso.isAtivo()) {
+                temIngressoAtivo = true;
+                data = ingresso.getData();
+                break;
+            }
+        }
+        if (temIngressoAtivo) {
+            registrosAtracoes.add(new RegistroAtracao(visitante, atracao, data));
+        } else {
+            System.out.println("O visitante não possui um ingresso ativo.");
+        }
+    }
 }
