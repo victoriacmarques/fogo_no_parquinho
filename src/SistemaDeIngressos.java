@@ -65,19 +65,20 @@ public class SistemaDeIngressos {
         System.out.println("1. Cadastrar Visitante");
         System.out.println("2. Listar Visitantes");
         System.out.println("3. Emitir Ingresso");
-        System.out.println("4. Sair");
+        System.out.println("4. Registrar Visita à Atração"); // Adicionado
+        System.out.println("5. Sair");
         System.out.println("======================================");
     }
 
     public void executar() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("***************************************");
+        System.out.println("*************");
         System.out.println("*                                     *");
         System.out.println("*  Bem-vindo ao sistema do parque de  *");
         System.out.println("*          diversões!                 *");
         System.out.println("*                                     *");
-        System.out.println("***************************************");
+        System.out.println("*************");
 
         while (true) {
             mostrarMenu();
@@ -105,6 +106,23 @@ public class SistemaDeIngressos {
                     }
                     break;
                 case 4:
+                    nomeVisitante = lerString(scanner, "Informe o nome do visitante:");
+                    v = gestaoDeVisitantes.encontrarVisitante(nomeVisitante);
+                    if (v != null) {
+                        System.out.println("Escolha a atração para registrar a visita:");
+                        gestaoDeAtracoes.listarAtracoes();
+                        int escolhaAtracao = lerInteiro(scanner, "Digite o número da atração:");
+                        if (escolhaAtracao >= 1 && escolhaAtracao <= Atracao.values().length) {
+                            gestaoDeIngressos.registrarVisitaAtracao(v, Atracao.values()[escolhaAtracao - 1]);
+                            System.out.println("Visita registrada com sucesso.");
+                        } else {
+                            System.out.println("Atração inválida.");
+                        }
+                    } else {
+                        System.out.println("Visitante não encontrado.");
+                    }
+                    break;
+                case 5:
                     System.out.println("Encerrando o sistema...");
                     scanner.close();
                     return;
@@ -114,3 +132,4 @@ public class SistemaDeIngressos {
         }
     }
 }
+

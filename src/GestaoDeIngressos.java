@@ -9,10 +9,12 @@ import java.util.Map;
 public class GestaoDeIngressos {
     private List<Ingresso> ingressos;
     private Map<String, List<Ingresso>> ingressosPorData;
+    private List<RegistroAtracao> registrosAtracoes;
 
     public GestaoDeIngressos() {
         this.ingressos = new ArrayList<>();
         this.ingressosPorData = new HashMap<>();
+        this.registrosAtracoes = new ArrayList<>();
     }
 
     public List<Ingresso> getIngressos() {
@@ -66,6 +68,22 @@ public class GestaoDeIngressos {
         } else {
             System.out.println("Limite máximo de ingressos alcançado para o dia.");
             return false;
+        }
+    }
+    public void registrarVisitaAtracao(Visitante visitante, Atracao atracao) {
+        boolean temIngressoAtivo = false;
+        String data = null;
+        for (Ingresso ingresso : ingressos) {
+            if (ingresso.getVisitante().equals(visitante) && ingresso.isAtivo()) {
+                temIngressoAtivo = true;
+                data = ingresso.getData();
+                break;
+            }
+        }
+        if (temIngressoAtivo) {
+            registrosAtracoes.add(new RegistroAtracao(visitante, atracao, data));
+        } else {
+            System.out.println("O visitante não possui um ingresso ativo.");
         }
     }
 }
