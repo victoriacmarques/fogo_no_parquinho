@@ -163,6 +163,10 @@ public class SistemaDeIngressos {
                     gestaoDeIngressos.listarVisitantesAtracaoPorData(data);
                     break;
                 case 8:
+                    String idIngresso = lerString(scanner, "Informe o ID do ingresso a ser cancelado:");
+                    gestaoDeIngressos.cancelarIngresso(idIngresso);
+                    break;
+                case 9:
                     System.out.println("Encerrando o sistema...");
                     scanner.close();
                     return;
