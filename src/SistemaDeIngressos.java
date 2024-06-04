@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class SistemaDeIngressos {
     private GestaoDeVisitantes gestaoDeVisitantes;
@@ -48,6 +50,19 @@ public class SistemaDeIngressos {
         return scanner.nextLine();
     }
 
+    private boolean validarMesAno(String mesAno) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
+            formatter.parse(mesAno);
+            String[] partes = mesAno.split("/");
+            int mes = Integer.parseInt(partes[0]);
+            int ano = Integer.parseInt(partes[1]);
+            return mes >= 1 && mes <= 12 && ano > 0;
+        } catch (DateTimeParseException | NumberFormatException e) {
+            return false;
+        }
+    }
+    
     private String lerTelefone(Scanner scanner, String mensagem) {
         while (true) {
             System.out.println(mensagem);
@@ -67,7 +82,8 @@ public class SistemaDeIngressos {
         System.out.println("3. Emitir Ingresso");
         System.out.println("4. Registrar Visita à Atração");
         System.out.println("5. Localizar Visitante");
-        System.out.println("6. Sair");
+        System.out.println("6. Consultar Faturamento");
+        System.out.println("7. Sair");
         System.out.println("======================================");
     }
 
@@ -132,7 +148,15 @@ public class SistemaDeIngressos {
                         System.out.println("Visitante não encontrado.");
                     }
                     break;
-                case 6:
+                    case 6:
+                    String mesAno = lerString(scanner, "Informe o mês e ano (mm/yyyy):");
+                    if (validarMesAno(mesAno)) {
+                        System.out.println("Faturamento: R$" + gestaoDeIngressos.consultarFaturamento(mesAno));
+                    } else {
+                        System.out.println("Formato inválido. Por favor, use o formato mm/yyyy.");
+                    }
+                    break;
+                case 7:
                     System.out.println("Encerrando o sistema...");
                     scanner.close();
                     return;
