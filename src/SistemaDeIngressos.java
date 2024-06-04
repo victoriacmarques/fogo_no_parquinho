@@ -158,6 +158,10 @@ public class SistemaDeIngressos {
                     }
                     break;
                 case 7:
+                    data = lerString(scanner, "Informe a data (dd/MM/yyyy) para ver a quantidade de visitantes por atração:");
+                    gestaoDeIngressos.listarVisitantesAtracaoPorData(data);
+                    break;
+                case 8:
                     System.out.println("Encerrando o sistema...");
                     scanner.close();
                     return;
