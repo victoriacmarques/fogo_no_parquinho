@@ -105,4 +105,13 @@ public class GestaoDeIngressos {
             }
     }
 }
+    public double consultarFaturamento(String mesAno) {
+        double faturamento = 0;
+        for (Ingresso ingresso : ingressos) {
+            if (ingresso.isAtivo() && ingresso.getData().substring(3).equals(mesAno)) {
+                faturamento += ingresso.getPreco();
+            }
+        }
+        return faturamento;
+    }
 }
