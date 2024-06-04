@@ -130,4 +130,33 @@ public class GestaoDeIngressos {
             System.out.println(entry.getKey() + ": " + entry.getValue().size());
         }
     }
+
+    public void cancelarIngresso(String idIngresso) {
+        Ingresso ingressoParaCancelar = null;
+        for (Ingresso ingresso : ingressos) {
+            if (ingresso.getIdIngresso().equals(idIngresso)) {
+                ingressoParaCancelar = ingresso;
+                break;
+            }
+        }
+
+        if (ingressoParaCancelar == null) {
+            System.out.println("Ingresso não encontrado.");
+            return;
+        }
+
+        if (!ingressoParaCancelar.isAtivo()) {
+            System.out.println("Este ingresso já está cancelado.");
+            return;
+        }
+
+        for (RegistroAtracao registro : registrosAtracoes) {
+            if (registro.getVisitante().equals(ingressoParaCancelar.getVisitante()) && registro.getData().equals(ingressoParaCancelar.getData())) {
+                System.out.println("Não é possível cancelar o ingresso, pois o visitante já registrou uma visita a uma atração.");
+                return;
+            }
+        }
+
+        ingressoParaCancelar.cancelar();
+    }
 }

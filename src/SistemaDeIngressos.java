@@ -84,9 +84,10 @@ public class SistemaDeIngressos {
         System.out.println("5. Localizar Visitante");
         System.out.println("6. Consultar Faturamento");
         System.out.println("7. Consultar Visitantes por Atração em uma Data");
-        System.out.println("8. Sair");
+        System.out.println("8. Cancelar Ingresso");
+        System.out.println("9. Sair");
         System.out.println("======================================");
-    }
+}
 
     public void executar() {
         Scanner scanner = new Scanner(System.in);
