@@ -65,8 +65,9 @@ public class SistemaDeIngressos {
         System.out.println("1. Cadastrar Visitante");
         System.out.println("2. Listar Visitantes");
         System.out.println("3. Emitir Ingresso");
-        System.out.println("4. Registrar Visita à Atração"); // Adicionado
-        System.out.println("5. Sair");
+        System.out.println("4. Registrar Visita à Atração");
+        System.out.println("5. Localizar Visitante");
+        System.out.println("6. Sair");
         System.out.println("======================================");
     }
 
@@ -123,6 +124,15 @@ public class SistemaDeIngressos {
                     }
                     break;
                 case 5:
+                    String busca = lerString(scanner, "Digite parte do nome ou o ID do ingresso:");
+                    v = gestaoDeVisitantes.encontrarVisitante(busca);
+                    if (v != null) {
+                        gestaoDeIngressos.listarAtracoesVisitante(v);
+                    } else {
+                        System.out.println("Visitante não encontrado.");
+                    }
+                    break;
+                case 6:
                     System.out.println("Encerrando o sistema...");
                     scanner.close();
                     return;
