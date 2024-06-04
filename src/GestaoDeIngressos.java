@@ -158,5 +158,6 @@ public class GestaoDeIngressos {
         }
 
         ingressoParaCancelar.cancelar();
+        System.out.println("Ingresso cancelado com sucesso.");
     }
 }
