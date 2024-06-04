@@ -114,4 +114,20 @@ public class GestaoDeIngressos {
         }
         return faturamento;
     }
+    public void listarVisitantesAtracaoPorData(String data) {
+        Map<String, Set<Visitante>> contagemAtracao = new HashMap<>();
+        for (Atracao atracao : Atracao.values()) {
+            contagemAtracao.put(atracao.getNome(), new HashSet<>());
+        }
+        for (RegistroAtracao registro : registrosAtracoes) {
+            if (registro.getData().equals(data)) {
+                contagemAtracao.get(registro.getAtracao().getNome()).add(registro.getVisitante());
+            }
+        }
+        List<Map.Entry<String, Set<Visitante>>> sortedEntries = new ArrayList<>(contagemAtracao.entrySet());
+        sortedEntries.sort((entry1, entry2) -> Integer.compare(entry2.getValue().size(), entry1.getValue().size()));
+        for (Map.Entry<String, Set<Visitante>> entry : sortedEntries) {
+            System.out.println(entry.getKey() + ": " + entry.getValue().size());
+        }
+    }
 }

@@ -83,7 +83,8 @@ public class SistemaDeIngressos {
         System.out.println("4. Registrar Visita à Atração");
         System.out.println("5. Localizar Visitante");
         System.out.println("6. Consultar Faturamento");
-        System.out.println("7. Sair");
+        System.out.println("7. Consultar Visitantes por Atração em uma Data");
+        System.out.println("8. Sair");
         System.out.println("======================================");
     }
 
@@ -157,6 +158,10 @@ public class SistemaDeIngressos {
                     }
                     break;
                 case 7:
+                    data = lerString(scanner, "Informe a data (dd/MM/yyyy) para ver a quantidade de visitantes por atração:");
+                    gestaoDeIngressos.listarVisitantesAtracaoPorData(data);
+                    break;
+                case 8:
                     System.out.println("Encerrando o sistema...");
                     scanner.close();
                     return;
