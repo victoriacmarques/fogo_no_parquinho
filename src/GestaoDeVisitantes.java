@@ -20,29 +20,20 @@ public class GestaoDeVisitantes {
         }
     }
 
-    public Visitante encontrarVisitante(String busca) {
-        Visitante visitanteEncontrado = buscarPorNome(busca);
-        if (visitanteEncontrado == null) {
-            visitanteEncontrado = buscarPorIdIngresso(busca);
+    //refazendo método de busca e a reduzindo redundância no código
+public Visitante encontrarVisitante(String busca) {
+    for (Visitante visitante : visitantes) {
+        if (visitante.getNome().contains(busca)) {
+            return visitante;
         }
-        return visitanteEncontrado;
     }
-    private Visitante buscarPorNome(String nome) {
-        for (Visitante visitante : visitantes) {
-            if (visitante.getNome().contains(nome)) {
-                return visitante;
-            }
+    for (Ingresso ingresso : gestaoDeIngressos.getIngressos()) {
+        if (ingresso.getIdIngresso().equals(busca)) {
+            return ingresso.getVisitante();
         }
-        return null;
     }
-    private Visitante buscarPorIdIngresso(String idIngresso) {
-        for (Ingresso ingresso : gestaoDeIngressos.getIngressos()) {
-            if (ingresso.getIdIngresso().equals(idIngresso)) {
-                return ingresso.getVisitante();
-            }
-        }
-        return null;
-    }
+   return null;
+}
 
     public void listarVisitantes() {
         if (visitantes.isEmpty()) {
