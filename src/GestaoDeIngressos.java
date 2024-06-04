@@ -3,8 +3,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class GestaoDeIngressos {
     private List<Ingresso> ingressos;
@@ -86,4 +88,21 @@ public class GestaoDeIngressos {
             System.out.println("O visitante não possui um ingresso ativo.");
         }
     }
+
+    public void listarAtracoesVisitante(Visitante visitante) {
+        Set<String> atracoesVisitadas = new HashSet<>();
+        for (RegistroAtracao registro : registrosAtracoes) {
+            if (registro.getVisitante().equals(visitante)) {
+                atracoesVisitadas.add(registro.getAtracao().getNome());
+            }
+        }
+        System.out.println("Atrações visitadas por " + visitante.getNome() + ":");
+        if (atracoesVisitadas.isEmpty()) {
+            System.out.println(visitante.getNome() + " não foi em nenhuma atração do parque.");
+        } else {
+            for (String atracao : atracoesVisitadas) {
+                System.out.println(atracao);
+            }
+    }
+}
 }
