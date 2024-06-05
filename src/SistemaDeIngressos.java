@@ -168,6 +168,10 @@ public class SistemaDeIngressos {
                     gestaoDeIngressos.cancelarIngresso(idIngresso);
                     break;
                 case 9:
+                    data = lerString(scanner, "Informe a data (dd/MM/yyyy");
+                    System.out.println("Total de visitantes nesse dia: " + gestaoDeIngressos.consultarTotalVisitantes(data));
+                    break;
+                case 10:
                     System.out.println("Encerrando o sistema...");
                     scanner.close();
                     return;
