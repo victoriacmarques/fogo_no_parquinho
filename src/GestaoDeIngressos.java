@@ -160,4 +160,13 @@ public class GestaoDeIngressos {
         ingressoParaCancelar.cancelar();
         System.out.println("Ingresso cancelado com sucesso.");
     }
+    public int consultarTotalVisitantes(String data) {
+        int total = 0;
+        for (Ingresso ingresso : ingressos) {
+            if (ingresso.getData().equals(data) && ingresso.isAtivo()) {
+                total++;
+            }
+        }
+        return total;
+    }
 }
