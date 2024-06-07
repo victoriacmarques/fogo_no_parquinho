@@ -1,3 +1,7 @@
+/**
+ * Representa um ingresso do parque de diversões.
+ */
+
 public class Ingresso {
     private String data;
     private Visitante visitante;
@@ -5,6 +9,15 @@ public class Ingresso {
     private int sequencia;
     private static final double PRECO_ADULTO = 100.00;
     private static final double PRECO_CRIANCA = 80.00;
+
+    /**
+     * Inicializa um ingresso com data, visitante e sequência.
+     *
+     * @param data Data do ingresso.
+     * @param visitante Visitante associado ao ingresso.
+     * @param sequencia Número sequencial do ingresso.
+     * @throws IllegalArgumentException se a data for nula ou vazia, ou se o visitante for nulo.
+     */
 
     public Ingresso(String data, Visitante visitante, int sequencia) {
         if (data == null || data.isEmpty()) {
