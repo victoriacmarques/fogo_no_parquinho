@@ -2,7 +2,9 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
+/**
+ * Sistema de gerenciamento de ingressos do parque de diversões.
+ */
 public class SistemaDeIngressos {
     private GestaoDeVisitantes gestaoDeVisitantes;
     private GestaoDeIngressos gestaoDeIngressos;
@@ -49,6 +51,13 @@ public class SistemaDeIngressos {
         System.out.println(mensagem);
         return scanner.nextLine();
     }
+    /**
+     * Valida o formato do mês e ano.
+     *
+     * @param mesAno Mês e ano no formato mm/yyyy.
+     * @return true se o formato for válido, false caso contrário.
+     * @throws IllegalArgumentException se o formato do mês ou ano for inválido.
+     */
 
     private boolean validarMesAno(String mesAno) {
         try {
