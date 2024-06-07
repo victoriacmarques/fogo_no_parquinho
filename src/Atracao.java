@@ -1,3 +1,7 @@
+/**
+ * Enumeração que representa as atrações do parque.
+ */
+
 public enum Atracao {
     MONTANHA_RUSSA("Montanha-russa"),
     RODA_GIGANTE("Roda-gigante"),
@@ -6,6 +10,13 @@ public enum Atracao {
     TREM_FANTASMA("Trem-fantasma");
 
     private String nome;
+
+    /**
+     * Inicializa uma atração com o nome fornecido.
+     *
+     * @param nome Nome da atração.
+     * @throws IllegalArgumentException se o nome for nulo ou vazio.
+     */
 
     Atracao(String nome) {
         this.nome = nome;
