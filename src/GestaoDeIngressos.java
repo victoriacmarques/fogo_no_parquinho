@@ -8,6 +8,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Gerencia os ingressos do parque.
+ */
+
 public class GestaoDeIngressos {
     private List<Ingresso> ingressos;
     private Map<String, List<Ingresso>> ingressosPorData;
@@ -23,6 +27,13 @@ public class GestaoDeIngressos {
         return ingressos;
     }
 
+    /**
+     * Valida a data no formato dd/MM/yyyy.
+     *
+     * @param data Data a ser validada.
+     * @return LocalDate correspondente à data ou null se a data for inválida.
+     */
+
     private LocalDate validarData(String data) {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -32,6 +43,15 @@ public class GestaoDeIngressos {
             return null;
         }
     }
+
+    /**
+     * Emite um ingresso para um visitante na data especificada.
+     *
+     * @param data Data do ingresso.
+     * @param visitante Visitante que receberá o ingresso.
+     * @return true se o ingresso foi emitido com sucesso, false caso contrário.
+     * @throws IllegalArgumentException se a data for inválida.
+     */
 
     public boolean emitirIngresso(String data, Visitante visitante) {
         LocalDate dataIngresso = validarData(data);
@@ -45,7 +65,7 @@ public class GestaoDeIngressos {
         }
         List<Ingresso> ingressosDoDia = ingressosPorData.getOrDefault(data, new ArrayList<>());
 
-
+        // Verificar se já existe um ingresso ativo para o visitante na mesma data
         for (Ingresso ingresso : ingressosDoDia) {
             if (ingresso.getVisitante().equals(visitante)) {
                 if (ingresso.isAtivo()) {
@@ -60,6 +80,7 @@ public class GestaoDeIngressos {
             }
         }
 
+        // Permitir a emissão de novos ingressos até o limite de 500 por dia
         if (ingressosDoDia.size() < 500) {
             Ingresso ingresso = new Ingresso(data, visitante, ingressosDoDia.size() + 1);
             ingressos.add(ingresso);
@@ -130,6 +151,14 @@ public class GestaoDeIngressos {
             System.out.println(entry.getKey() + ": " + entry.getValue().size());
         }
     }
+
+    /**
+     * Cancela um ingresso com base no seu ID.
+     *
+     * @param idIngresso ID do ingresso a ser cancelado.
+     * @throws IllegalArgumentException se o ingresso não for encontrado ou já estiver cancelado,
+     * ou se o visitante já tiver registrado uma visita a uma atração.
+     */
 
     public void cancelarIngresso(String idIngresso) {
         Ingresso ingressoParaCancelar = null;
